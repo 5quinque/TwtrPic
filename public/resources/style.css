@@ -1,0 +1,132 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background-image: url('/resources/img-noise-120x120.png');
+    overflow-x: hidden;
+}
+
+.grid {
+}
+
+/* clear fix */
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.grid-sizer,
+.grid-image-item {
+    width: 10%;
+}
+
+.grid-image-item {
+    float: left;
+}
+
+/*.grid-item--width2 { width: 20%; }*/
+
+.grid-image-item img {
+    position: relative;
+    display: block;
+    max-width: 100%;
+}
+
+.search {
+    background-color: #d43f3a;
+    width: 400px;
+    height: 60px;
+    text-align: center;
+    position: absolute;
+    left: 20px;
+    z-index: 3;
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+    opacity: 0.7;
+    display: none;
+}
+
+.search-full {
+    opacity: 1;
+}
+
+.search input {
+    font-size: 29px;
+    color: #fff;
+    background-color: #d43f3a;
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+.settings {
+    background-color: #d43f3a;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    position: absolute;
+    right: 20px;
+    z-index: 3;
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+    opacity: 0.7;
+    transition: all .4s ease-in-out;
+}
+
+.settings-full {
+    opacity: 1;
+    width: 250px;
+}
+
+.icon-setting {
+    margin-top: 6px;
+    margin-left: 9px;
+}
+
+.icon-search {
+    margin-top: 4px;
+}
+
+.loading {
+    background-color: #d43f3a;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    bottom: 0px;
+    z-index: 3;
+    color: #fff;
+    margin-top: 6px;
+    margin-left: 9px;
+    border-radius: 6px;
+    display: none;
+}
+
+/* Enlarging image */
+
+.transition {
+    -webkit-transform: scale(1.3);
+    -moz-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    transform: scale(1.3);
+    z-index: 2;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px 0px #333;
+}
+
+.twit_img {
+    -webkit-transition: all .4s ease-in-out;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -ms-transition: all .4s ease-in-out;
+}
