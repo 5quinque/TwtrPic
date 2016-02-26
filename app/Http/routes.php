@@ -15,7 +15,7 @@ Route::get('/','PagesController@index');
 Route::get('about', 'PagesController@about');
 
 Route::get('search', 'PagesController@search');
-Route::get('updategrid/{search_term?}/{newer_or_older?}/{id?}/{nsfw?}', ['uses' => 'PagesController@update']);
+Route::get('updategrid/{search_term?}/{newer_or_older?}/{id?}/{nsfw?}', ['uses' => 'AJAXController@update']);
 
 Route::get('image/{image_hash}', ['uses' => 'ImageController@showimage']);
 
