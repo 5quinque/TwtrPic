@@ -18,8 +18,6 @@ class PagesController extends Controller
         $latest_id = $images[0]->id;
         $oldest_id = $images[79]->id;
 
-        //return [$latest_id, $oldest_id];
-
         return view('pages.index', compact('images', 'time', 'latest_id', 'oldest_id'));
     }
 

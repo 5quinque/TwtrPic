@@ -143,7 +143,6 @@
                 };
                 img.src = url;
             })(toLoad[i], promises[i] = $.Deferred());
-
         }
 
         $.when.apply($, promises).done(function() {
