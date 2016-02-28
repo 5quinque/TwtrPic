@@ -70,9 +70,9 @@ body {
 
 .settings {
     background-color: #d43f3a;
+    padding-top: 5px;
     width: 60px;
     height: 60px;
-    line-height: 60px;
     position: absolute;
     right: 20px;
     z-index: 3;
@@ -87,13 +87,77 @@ body {
     width: 250px;
 }
 
+
+.switch {
+    text-align: center;
+    left: 50%;
+    background-color: #1bbc9b;
+    width: 150px;
+    margin-left: -30px;
+    display: inline-block;
+    border-radius: 8px;
+    height: 50px;
+    padding: 5px;
+    position: absolute;
+    zoom: 1;
+    display: none;
+}
+.switch:before, .switch:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+.switch:after {
+    clear: both;
+}
+.switch label {
+    float: left;
+    width: 50%;
+    position: relative;
+    z-index: 2;
+    line-height: 40px;
+    cursor: pointer;
+    color: #117964;
+}
+.switch input[type="radio"] {
+    display: none;
+}
+.switch input[type="radio"]:checked + label {
+    color: #141241;
+    font-weight: bold;
+}
+.switch span {
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    display: block;
+    border-radius: 5px 0 0 5px;
+    background-color: #ffffff;
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+.switch span.right {
+    left: 50%;
+    border-radius: 0 5px 5px 0;
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+
+.switch-full {
+    display: inline;
+}
+
 .icon-setting {
-    margin-top: 6px;
-    margin-left: 9px;
+    padding-top: 1px;
+    padding-left: 9px;
 }
 
 .icon-search {
-    margin-top: 4px;
+    padding-top: 4px;
 }
 
 .loading {
@@ -106,10 +170,9 @@ body {
     bottom: 0px;
     z-index: 3;
     color: #fff;
-    margin-top: 6px;
-    margin-left: 9px;
+    padding-top: 6px;
+    padding-left: 6px;
     border-radius: 6px;
-    display: none;
 }
 
 /* Enlarging image */

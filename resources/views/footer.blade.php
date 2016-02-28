@@ -12,9 +12,6 @@
     // How many images have loaded
     var images_loaded = 0;
 
-    // Can we get newer images yet?
-    var initialImageLoadComplete = false;
-
     // Are we already trying to get some images?
     var gettingMoreImages = false;
 
@@ -42,6 +39,8 @@
         $(this).toggleClass('fa-spin');
         setTimeout( function(){ $('.icon-setting').removeClass('fa-spin'); }, 400);
         $(this).parent().toggleClass('settings-full');
+
+        $('.switch').toggleClass('switch-full');
     });
 
     // Clicking on search field
@@ -69,11 +68,6 @@
             console.log("We are already getting images!")
             return false;
         }
-
-//        if (!initialImageLoadComplete) {
-//            console.log("Initial images haven't finished loading yet");
-//            return false;
-//        }
 
         return true;
     }
@@ -113,7 +107,7 @@
             loadImages(toLoad, newer_or_older);
        });
     }
-    //setInterval(function() {update(latest_id, 'newerthan')}, 5000);
+    setInterval(function() {update(latest_id, 'newerthan')}, 5000);
 
     function loadImages(toLoad, noo) {
         $(toLoad).each(function(i,v){
@@ -124,7 +118,12 @@
                 images_loaded += 1;
                 $(tmpImg).addClass('twit_img');
                 var tmpElem = $(tmpImg).wrap("<div class='grid-image-item'></div>").parent();
-                $grid.append(tmpElem).masonry('appended', tmpElem);
+
+                if (noo == 'newerthan') {
+                    $grid.prepend(tmpElem).masonry('prepended', tmpElem);
+                } else {
+                    $grid.append(tmpElem).masonry('appended', tmpElem);
+                }
             };
         });
 
