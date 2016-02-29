@@ -9,6 +9,8 @@
     var latest_id = 0;
     var oldest_id = 0;
 
+    var nsfw = 0;
+
     // How many images have loaded
     var images_loaded = 0;
 
@@ -41,6 +43,10 @@
         $(this).parent().toggleClass('settings-full');
 
         $('.switch').toggleClass('switch-full');
+    });
+
+    $("input[name='sfw']").on('change', function() {
+        nsfw = $(this).val();
     });
 
     // Clicking on search field
@@ -83,7 +89,7 @@
 
         $.ajax({
             method: "GET",
-            url: "/updategrid/%23selfie/" + newer_or_older + "/" + loadFrom
+            url: "/updategrid/%23selfie/" + newer_or_older + "/" + loadFrom + "/" + nsfw
         }).done(function( images ) {
             if (images.length == 0) {
                 console.log('No images to update')

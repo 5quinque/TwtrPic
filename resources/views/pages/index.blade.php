@@ -7,15 +7,13 @@
         <input id="searchbox" type="text" placeholder="Search"></input>
         <i class="fa fa-search fa-3x icon-search"></i>
     </div>
-    <div class="settings"><i class="fa fa-cog fa-3x icon-setting"></i>
+    <div class="settings">
+        <i class="fa fa-cog fa-3x icon-setting"></i>
         <div class="switch">
-            <input name="radio" type="radio" value="optionone" id="optionone" checked>
-            <label for="optionone">SFW</label>
-
-            <input name="radio" type="radio" value="optiontwo" id="optiontwo">
-            <label for="optiontwo" class="right">NSFW</label>
-
-            <span aria-hidden="true"></span>
+            <input name="sfw" type="radio" value="0" id="sfw" checked>
+            <input name="sfw" type="radio" value="1" id="nsfw">
+            <label class='label1' for="sfw">SFW</label>
+            <label class='label2' for="nsfw">NSFW</label>
         </div>
     </div>
     <div class="grid-sizer"></div>
