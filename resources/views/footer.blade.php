@@ -107,7 +107,7 @@
             }
 
             $.each(images[1].data, function(k,v) {
-                toLoad.push("image/"+v.image_md5_hash+".jpg?"+unixTime);
+                toLoad.push(["image/"+v.image_md5_hash+".jpg?"+unixTime, v.nsfw]);
             });
 
             loadImages(toLoad, newer_or_older);
@@ -119,11 +119,16 @@
         $(toLoad).each(function(i,v){
             var tmpImg = new Image();
 
-            tmpImg.src = v;
+            tmpImg.src = v[0];
             tmpImg.onload = function() {
                 images_loaded += 1;
                 $(tmpImg).addClass('twit_img');
                 var tmpElem = $(tmpImg).wrap("<div class='grid-image-item'></div>").parent();
+
+                if (v[1] == 1 && nsfw == false) {
+                    tmpElem.addClass('nsfw_img');
+                    return false;
+                }
 
                 if (noo == 'newerthan') {
                     $grid.prepend(tmpElem).masonry('prepended', tmpElem);

@@ -189,6 +189,14 @@ body {
     border-radius: 6px;
 }
 
+.nsfw_img {
+    display: none !important;
+}
+
+.nsfw_img img {
+    display: none !important;
+}
+
 /* Enlarging image */
 
 .transition {

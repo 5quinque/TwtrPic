@@ -26,9 +26,9 @@ class AJAXController extends Controller
         $orderBy = ($newer_or_older == "newerthan" ? "asc" : "desc");
 
         if ($id == 0) {
-            $images = Tweets::where('search_term', $search_term)->whereIn('nsfw', array('0', $nsfw))->orderBy('updated_at', $orderBy)->paginate(80);
+            $images = Tweets::where('search_term', $search_term)->orderBy('updated_at', $orderBy)->paginate(80);
         } else {
-            $images = Tweets::where('id', $no, $id)->where('search_term', $search_term)->whereIn('nsfw', array('0', $nsfw))->orderBy('updated_at', $orderBy)->paginate(80);
+            $images = Tweets::where('id', $no, $id)->where('search_term', $search_term)->orderBy('updated_at', $orderBy)->paginate(80);
         }
 
         if (count($images) != 0) {
