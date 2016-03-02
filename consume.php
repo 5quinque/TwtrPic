@@ -67,7 +67,7 @@ toConsumeTweet::chunk(100, function($tweets) {
 
         file_put_contents(dirname(__FILE__) . "/$image_location", $image);
 
-        $nsfw = preg_match('/(cum|topless|sex|#pelfie|#cock|Dressing room #selfie|#ass|#lesbian|#nsfw|naked|#hentai|slutty|#breasts|horny|nude|masturbation|deepthroat|#teen|#amateur|#sex|#milf|#gonewild|#tit|tits|#pov|dick|boobs|busty|#undies|#fucking|#cumshow|#pussy|titty|nipple|xxx|#bbc|porn|#wank|tittied)/i', $tweet->text);
+        $nsfw = preg_match('/(cum|topless|sex|#pelfie|#cock|Dressing room #selfie|#ass|#lesbian|#nsfw|naked|#hentai|slutty|#breasts|horny|nude|masturbation|deepthroat|#teen|#amateur|#sex|#milf|#gonewild|#tit|tits|#pov|dick|boobs|busty|#undies|#fucking|#cumshow|#pussy|titty|nipple|xxx|#bbc|porn|#wank|tittied|lesbian|shemale|tranny)/i', $tweet->text);
 
         $tw = new Tweets;
         $tw->twitter_id = $tweet->twitter_id;

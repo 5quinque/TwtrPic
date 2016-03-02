@@ -19,6 +19,8 @@
 
     var unixTime = Date.now();
 
+    var nsfw_items = [];
+
     // Masonry Grid
     var $grid = $('.grid').masonry({
             itemSelector: '.grid-image-item',
@@ -47,6 +49,12 @@
 
     $("input[name='sfw']").on('change', function() {
         nsfw = $(this).val();
+
+        if (nsfw) {
+            loadNsfwImages();
+        } else {
+            removeNsfwImages();
+        }
     });
 
     // Clicking on search field
@@ -71,7 +79,7 @@
         }
 
         if (gettingMoreImages) {
-            console.log("We are already getting images!")
+            console.log("We are already getting images!");
             return false;
         }
 
@@ -116,7 +124,7 @@
     setInterval(function() {update(latest_id, 'newerthan')}, 5000);
 
     function loadImages(toLoad, noo) {
-        $(toLoad).each(function(i,v){
+        $(toLoad).each(function(i, v){
             var tmpImg = new Image();
 
             tmpImg.src = v[0];
@@ -125,8 +133,14 @@
                 $(tmpImg).addClass('twit_img');
                 var tmpElem = $(tmpImg).wrap("<div class='grid-image-item'></div>").parent();
 
+                if (v[1] == 1) {
+                    tmpElem.addClass('nsfw_img');
+                }
+
                 if (v[1] == 1 && nsfw == false) {
                     tmpElem.addClass('nsfw_img');
+                    nsfw_items.push(tmpElem);
+
                     return false;
                 }
 
@@ -139,6 +153,21 @@
         });
 
         gettingMoreImages = false;
+    }
+
+    function loadNsfwImages() {
+        console.log("Running loadNsfwImages function");
+        $(nsfw_items).each(function(i, v) {
+            console.log("Hello", v);
+            $grid.prepend(v).masonry('prepended', v);
+        });
+    }
+
+    function removeNsfwImages() {
+        $('.nsfw_image').each(function(){
+            console.log($(this));
+            $grid.masonry( 'remove', $(this) ).masonry('layout');
+        });
     }
 
     //below taken from http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
