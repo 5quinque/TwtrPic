@@ -10,10 +10,10 @@
     <div class="settings">
         <i class="fa fa-cog fa-3x icon-setting"></i>
         <div class="switch">
-            <input name="sfw" type="radio" value="0" id="sfw" checked>
-            <input name="sfw" type="radio" value="1" id="nsfw">
-            <label class='label1' for="sfw">SFW</label>
-            <label class='label2' for="nsfw">NSFW</label>
+            <input name="autoupdate" type="radio" value="0" id="au_on" checked>
+            <input name="autoupdate" type="radio" value="1" id="au_off">
+            <label class='label1' for="au_on">Auto Update</label>
+            <label class='label2' for="au_off">Pause</label>
         </div>
     </div>
     <div class="grid-sizer"></div>

@@ -9,17 +9,15 @@
     var latest_id = 0;
     var oldest_id = 0;
 
-    var nsfw = 0;
-
     // How many images have loaded
     var images_loaded = 0;
+
+    var autoupdate = true;
 
     // Are we already trying to get some images?
     var gettingMoreImages = false;
 
     var unixTime = Date.now();
-
-    var nsfw_items = [];
 
     // Masonry Grid
     var $grid = $('.grid').masonry({
@@ -29,6 +27,8 @@
         });
 
     update(latest_id, 'olderthan');
+
+    var autoUpdateInterval = setInterval(function() {update(latest_id, 'newerthan')}, 5000);
 
     // Enlarge images when hovering
     $(document).on('mouseenter', '.twit_img', function() {
@@ -47,13 +47,15 @@
         $('.switch').toggleClass('switch-full');
     });
 
-    $("input[name='sfw']").on('change', function() {
-        nsfw = $(this).val();
+    $("input[name='autoupdate']").on('change', function() {
+        autoupdate = $(this).val();
 
-        if (nsfw) {
-            loadNsfwImages();
+        if (autoupdate) {
+            console.log("No more auto updates");
+            clearInterval(autoUpdateInterval);
         } else {
-            removeNsfwImages();
+            console.log("Turning auto updates back on");
+            //var autoUpdateInterval = setInterval(function() {update(latest_id, 'newerthan')}, 5000);
         }
     });
 
@@ -74,10 +76,6 @@
     }
 
     function canWeUpdate() {
-        if (images_loaded == 0) {
-            return true;
-        }
-
         if (gettingMoreImages) {
             console.log("We are already getting images!");
             return false;
@@ -90,6 +88,7 @@
         var toLoad = [];
 
         if (canWeUpdate()) {
+            console.log("Setting gettingMoreImages true");
             gettingMoreImages = true;
         } else {
             return false;
@@ -97,7 +96,7 @@
 
         $.ajax({
             method: "GET",
-            url: "/updategrid/%23selfie/" + newer_or_older + "/" + loadFrom + "/" + nsfw
+            url: "/updategrid/%23selfie/" + newer_or_older + "/" + loadFrom
         }).done(function( images ) {
             if (images.length == 0) {
                 console.log('No images to update')
@@ -115,59 +114,49 @@
             }
 
             $.each(images[1].data, function(k,v) {
-                toLoad.push(["image/"+v.image_md5_hash+".jpg?"+unixTime, v.nsfw]);
+                toLoad.push("image/"+v.image_md5_hash+".jpg?"+unixTime);
             });
 
             loadImages(toLoad, newer_or_older);
        });
     }
-    setInterval(function() {update(latest_id, 'newerthan')}, 5000);
 
     function loadImages(toLoad, noo) {
         $(toLoad).each(function(i, v){
             var tmpImg = new Image();
 
-            tmpImg.src = v[0];
+            tmpImg.src = v;
             tmpImg.onload = function() {
                 images_loaded += 1;
                 $(tmpImg).addClass('twit_img');
                 var tmpElem = $(tmpImg).wrap("<div class='grid-image-item'></div>").parent();
-
-                if (v[1] == 1) {
-                    tmpElem.addClass('nsfw_img');
-                }
-
-                if (v[1] == 1 && nsfw == false) {
-                    tmpElem.addClass('nsfw_img');
-                    nsfw_items.push(tmpElem);
-
-                    return false;
-                }
 
                 if (noo == 'newerthan') {
                     $grid.prepend(tmpElem).masonry('prepended', tmpElem);
                 } else {
                     $grid.append(tmpElem).masonry('appended', tmpElem);
                 }
+
+                toLoad = removeA(toLoad, v);
+
+                if (toLoad.length == 0) {
+                    console.log("All images loaded");
+                    gettingMoreImages = false;
+                }
             };
         });
 
-        gettingMoreImages = false;
     }
 
-    function loadNsfwImages() {
-        console.log("Running loadNsfwImages function");
-        $(nsfw_items).each(function(i, v) {
-            console.log("Hello", v);
-            $grid.prepend(v).masonry('prepended', v);
-        });
-    }
-
-    function removeNsfwImages() {
-        $('.nsfw_image').each(function(){
-            console.log($(this));
-            $grid.masonry( 'remove', $(this) ).masonry('layout');
-        });
+    function removeA(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
     }
 
     //below taken from http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
