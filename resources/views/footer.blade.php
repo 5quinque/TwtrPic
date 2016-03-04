@@ -141,6 +141,7 @@
 
                 if (toLoad.length == 0) {
                     console.log("All images loaded");
+                    $('.loading').hide();
                     gettingMoreImages = false;
                 }
             };
