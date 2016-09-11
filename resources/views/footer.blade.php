@@ -1,7 +1,7 @@
 @section('footer')
 
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="//npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+<script src="//unpkg.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
 
 <script>
